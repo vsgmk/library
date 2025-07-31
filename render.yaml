@@ -1,13 +1,11 @@
 services:
   - type: web
-    name: django-web
+    name: django-backend
     env: python
     buildCommand: "./build.sh"
-    startCommand: gunicorn myproject.wsgi:application
+    startCommand: gunicorn core.wsgi:application
     envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: myproject.settings
       - key: DATABASE_URL
         fromDatabase:
-          name: your-db-name
+          name: myapp-db   # <-- Must match your Render DB name
           property: connectionString
