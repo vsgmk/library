@@ -2,12 +2,12 @@ services:
   - type: web
     name: django-web
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "./build.sh"
     startCommand: gunicorn myproject.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: myproject.settings
       - key: DATABASE_URL
         fromDatabase:
-          name: mydb  # use exact name of your Render database
+          name: your-db-name
           property: connectionString
